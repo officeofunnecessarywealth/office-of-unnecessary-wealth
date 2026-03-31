@@ -22,13 +22,13 @@
     </div>
   </header>
 
-  <main class="page">
+  <main class="page page-form">
     <div class="page-header">
       <div class="page-label">Submissions</div>
       <h2>Submit to the Office</h2>
     </div>
 
-    <p>
+    <p class="page-intro">
       Applicants are invited to enter preliminary review. Please provide the following information with seriousness and precision.
     </p>
 
@@ -37,23 +37,23 @@
         <div class="field-grid">
           <div class="field">
             <label for="projectTitle">Project Title</label>
-            <input id="projectTitle" name="projectTitle" required>
+            <input type="text" id="projectTitle" name="projectTitle" required />
           </div>
 
           <div class="field">
             <label for="alias">Applicant Alias</label>
-            <input id="alias" name="alias" required>
+            <input type="text" id="alias" name="alias" required />
           </div>
 
           <div class="field">
             <label for="email">Contact Email</label>
-            <input id="email" name="email" type="email" required>
+            <input type="email" id="email" name="email" required />
             <div class="helper">Used privately by the Office for contact and review notices.</div>
           </div>
 
           <div class="field">
             <label for="amount">Requested Amount</label>
-            <input id="amount" name="amount" placeholder="e.g. $12,000" required>
+            <input type="text" id="amount" name="amount" placeholder="e.g. $12,000" required />
           </div>
 
           <div class="field full">
@@ -110,7 +110,7 @@
         </div>
 
         <div class="declaration">
-          <input type="checkbox" id="declaration" required>
+          <input type="checkbox" id="declaration" required />
           <label for="declaration">
             I confirm that this proposal serves no necessary practical function and is submitted in good faith to the Office of Unnecessary Wealth.
           </label>

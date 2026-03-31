@@ -33,39 +33,54 @@
     </p>
 
     <div class="form-wrap">
-      <form
-        id="proposalForm"
-        action="https://formspree.io/f/xjgprakj"
-        method="POST"
+      <div
+        data-fs-success
+        style="display:none; border: 1px solid var(--border); background: rgba(31, 58, 50, 0.05); padding: 20px; margin-bottom: 22px;"
       >
-        <input type="hidden" name="_subject" value="OUW Submission — Program 001" />
-        <input type="hidden" name="_next" value="https://officeofunnecessarywealth.github.io/office-of-unnecessary-wealth/thank-you.html" />
+        <strong style="display:block; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.08em; font-size:12px; color:var(--accent);">
+          Submission received
+        </strong>
+        <p>Your proposal has entered preliminary review.</p>
+        <p>The Office will assess its unnecessary merit, symbolic density, and funding temperament.</p>
+        <p style="margin-bottom: 0; color: var(--text-muted);">
+          No further action is required unless contacted by the Office.
+        </p>
+      </div>
 
+      <div data-fs-error style="display:none; border: 1px solid #a94442; background: rgba(169, 68, 66, 0.06); padding: 16px; margin-bottom: 22px;">
+        The Office was unable to receive your submission. Please review the form and try again.
+      </div>
+
+      <form id="proposalForm">
         <div class="field-grid">
           <div class="field">
             <label for="projectTitle">Project Title</label>
-            <input type="text" id="projectTitle" name="projectTitle" required />
+            <input type="text" id="projectTitle" name="projectTitle" data-fs-field required />
+            <span data-fs-error="projectTitle" class="helper"></span>
           </div>
 
           <div class="field">
             <label for="alias">Applicant Alias</label>
-            <input type="text" id="alias" name="alias" required />
+            <input type="text" id="alias" name="alias" data-fs-field required />
+            <span data-fs-error="alias" class="helper"></span>
           </div>
 
           <div class="field">
             <label for="email">Contact Email</label>
-            <input type="email" id="email" name="email" required />
+            <input type="email" id="email" name="email" data-fs-field required />
             <div class="helper">Used privately by the Office for contact and review notices.</div>
+            <span data-fs-error="email" class="helper"></span>
           </div>
 
           <div class="field">
             <label for="amount">Requested Amount</label>
-            <input type="text" id="amount" name="amount" placeholder="e.g. $12,000" required />
+            <input type="text" id="amount" name="amount" placeholder="e.g. $12,000" data-fs-field required />
+            <span data-fs-error="amount" class="helper"></span>
           </div>
 
           <div class="field full">
             <label for="category">Category</label>
-            <select id="category" name="category" required>
+            <select id="category" name="category" data-fs-field required>
               <option value="">Select a category</option>
               <option>Object</option>
               <option>Platform</option>
@@ -77,42 +92,49 @@
               <option>Archive</option>
               <option>Other</option>
             </select>
+            <span data-fs-error="category" class="helper"></span>
           </div>
 
           <div class="field full">
             <label for="wealth">What unnecessary wealth will this project create?</label>
-            <textarea id="wealth" name="wealth" required></textarea>
+            <textarea id="wealth" name="wealth" data-fs-field required></textarea>
+            <span data-fs-error="wealth" class="helper"></span>
           </div>
 
           <div class="field full">
             <label for="exist">Why must this exist despite not being necessary?</label>
-            <textarea id="exist" name="exist" required></textarea>
+            <textarea id="exist" name="exist" data-fs-field required></textarea>
+            <span data-fs-error="exist" class="helper"></span>
           </div>
 
           <div class="field full">
             <label for="benefits">Who benefits from this unnecessary wealth?</label>
-            <textarea id="benefits" name="benefits" required></textarea>
+            <textarea id="benefits" name="benefits" data-fs-field required></textarea>
+            <span data-fs-error="benefits" class="helper"></span>
           </div>
 
           <div class="field full">
             <label for="mechanism">How will the project increase prestige, excess, or irrational value?</label>
-            <textarea id="mechanism" name="mechanism" required></textarea>
+            <textarea id="mechanism" name="mechanism" data-fs-field required></textarea>
+            <span data-fs-error="mechanism" class="helper"></span>
           </div>
 
           <div class="field full">
             <label for="loss">What would be lost if this project were never realized?</label>
-            <textarea id="loss" name="loss" required></textarea>
+            <textarea id="loss" name="loss" data-fs-field required></textarea>
+            <span data-fs-error="loss" class="helper"></span>
           </div>
 
           <div class="field full">
             <label for="stage">Current Stage of Development</label>
-            <select id="stage" name="stage" required>
+            <select id="stage" name="stage" data-fs-field required>
               <option value="">Select current stage</option>
               <option>Concept only</option>
               <option>Partially imagined</option>
               <option>Ready for ceremonial approval</option>
               <option>Structurally inevitable</option>
             </select>
+            <span data-fs-error="stage" class="helper"></span>
           </div>
         </div>
 
@@ -124,7 +146,7 @@
         </div>
 
         <div style="margin-top: 20px;">
-          <button class="button primary" type="submit">Submit to Office</button>
+          <button class="button primary" type="submit" data-fs-submit-btn>Submit to Office</button>
         </div>
 
         <div class="form-note">
@@ -138,5 +160,18 @@
     <p><strong>The Office of Unnecessary Wealth</strong><br>Program 001: The Public Grant for Unnecessary Wealth</p>
     <p>Publication does not imply endorsement. The Office reserves the right to classify, defer, elevate, or quietly respect any submission.</p>
   </footer>
+
+  <script>
+    window.formspree =
+      window.formspree ||
+      function () {
+        (formspree.q = formspree.q || []).push(arguments);
+      };
+    formspree('initForm', {
+      formElement: '#proposalForm',
+      formId: 'xjgprakj'
+    });
+  </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>

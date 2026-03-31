@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit — The Office of Unnecessary Wealth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-mini">The Office of Unnecessary Wealth</div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="guidelines.html">Guidelines</a>
+        <a href="submit.html" class="active">Submit</a>
+        <a href="registry.html">Registry</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="page-header">
+      <div class="page-label">Submissions</div>
+      <h2>Submit to the Office</h2>
+    </div>
+
+    <p>
+      Applicants are invited to enter preliminary review. Please provide the following information with seriousness and precision.
+    </p>
+
+    <div class="form-wrap">
+      <form id="proposalForm">
+        <div class="field-grid">
+          <div class="field">
+            <label for="projectTitle">Project Title</label>
+            <input id="projectTitle" name="projectTitle" required>
+          </div>
+
+          <div class="field">
+            <label for="alias">Applicant Alias</label>
+            <input id="alias" name="alias" required>
+          </div>
+
+          <div class="field">
+            <label for="email">Contact Email</label>
+            <input id="email" name="email" type="email" required>
+            <div class="helper">Used privately by the Office for contact and review notices.</div>
+          </div>
+
+          <div class="field">
+            <label for="amount">Requested Amount</label>
+            <input id="amount" name="amount" placeholder="e.g. $12,000" required>
+          </div>
+
+          <div class="field full">
+            <label for="category">Category</label>
+            <select id="category" name="category" required>
+              <option value="">Select a category</option>
+              <option>Object</option>
+              <option>Platform</option>
+              <option>Service</option>
+              <option>Ceremony</option>
+              <option>Membership</option>
+              <option>Monument</option>
+              <option>Tool</option>
+              <option>Archive</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label for="wealth">What unnecessary wealth will this project create?</label>
+            <textarea id="wealth" name="wealth" required></textarea>
+          </div>
+
+          <div class="field full">
+            <label for="exist">Why must this exist despite not being necessary?</label>
+            <textarea id="exist" name="exist" required></textarea>
+          </div>
+
+          <div class="field full">
+            <label for="benefits">Who benefits from this unnecessary wealth?</label>
+            <textarea id="benefits" name="benefits" required></textarea>
+          </div>
+
+          <div class="field full">
+            <label for="mechanism">How will the project increase prestige, excess, or irrational value?</label>
+            <textarea id="mechanism" name="mechanism" required></textarea>
+          </div>
+
+          <div class="field full">
+            <label for="loss">What would be lost if this project were never realized?</label>
+            <textarea id="loss" name="loss" required></textarea>
+          </div>
+
+          <div class="field full">
+            <label for="stage">Current Stage of Development</label>
+            <select id="stage" name="stage" required>
+              <option value="">Select current stage</option>
+              <option>Concept only</option>
+              <option>Partially imagined</option>
+              <option>Ready for ceremonial approval</option>
+              <option>Structurally inevitable</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="declaration">
+          <input type="checkbox" id="declaration" required>
+          <label for="declaration">
+            I confirm that this proposal serves no necessary practical function and is submitted in good faith to the Office of Unnecessary Wealth.
+          </label>
+        </div>
+
+        <div style="margin-top: 20px;">
+          <button class="button primary" type="submit">Submit to Office</button>
+        </div>
+
+        <div class="form-note">
+          Public alias + private contact email. Submissions are not published automatically.
+        </div>
+      </form>
+
+      <div class="success-message" id="successMessage">
+        <strong>Submission received</strong>
+        <p>Your proposal has entered preliminary review.</p>
+        <p>The Office will assess its unnecessary merit, symbolic density, and funding temperament.</p>
+        <p id="referenceLine"></p>
+        <p style="margin-bottom: 0; color: var(--text-muted);">Administrative silence does not imply dismissal.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p><strong>The Office of Unnecessary Wealth</strong><br>Program 001: The Public Grant for Unnecessary Wealth</p>
+    <p>Publication does not imply endorsement. The Office reserves the right to classify, defer, elevate, or quietly respect any submission.</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('proposalForm');
+    const successMessage = document.getElementById('successMessage');
+    const referenceLine = document.getElementById('referenceLine');
+
+    function generateReferenceNumber() {
+      const number = Math.floor(Math.random() * 900 + 100);
+      return `Reference Number: OUW-001-${number}`;
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      const reference = generateReferenceNumber();
+      referenceLine.textContent = reference;
+      form.style.display = 'none';
+      successMessage.style.display = 'block';
+      successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  </script>
+</body>
+</html>

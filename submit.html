@@ -33,7 +33,14 @@
     </p>
 
     <div class="form-wrap">
-      <form id="proposalForm">
+      <form
+        id="proposalForm"
+        action="https://formspree.io/f/xjgprakj"
+        method="POST"
+      >
+        <input type="hidden" name="_subject" value="OUW Submission — Program 001" />
+        <input type="hidden" name="_next" value="https://officeofunnecessarywealth.github.io/office-of-unnecessary-wealth/thank-you.html" />
+
         <div class="field-grid">
           <div class="field">
             <label for="projectTitle">Project Title</label>
@@ -124,14 +131,6 @@
           Public alias + private contact email. Submissions are not published automatically.
         </div>
       </form>
-
-      <div class="success-message" id="successMessage">
-        <strong>Submission received</strong>
-        <p>Your proposal has entered preliminary review.</p>
-        <p>The Office will assess its unnecessary merit, symbolic density, and funding temperament.</p>
-        <p id="referenceLine"></p>
-        <p style="margin-bottom: 0; color: var(--text-muted);">Administrative silence does not imply dismissal.</p>
-      </div>
     </div>
   </main>
 
@@ -139,25 +138,5 @@
     <p><strong>The Office of Unnecessary Wealth</strong><br>Program 001: The Public Grant for Unnecessary Wealth</p>
     <p>Publication does not imply endorsement. The Office reserves the right to classify, defer, elevate, or quietly respect any submission.</p>
   </footer>
-
-  <script>
-    const form = document.getElementById('proposalForm');
-    const successMessage = document.getElementById('successMessage');
-    const referenceLine = document.getElementById('referenceLine');
-
-    function generateReferenceNumber() {
-      const number = Math.floor(Math.random() * 900 + 100);
-      return `Reference Number: OUW-001-${number}`;
-    }
-
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-      const reference = generateReferenceNumber();
-      referenceLine.textContent = reference;
-      form.style.display = 'none';
-      successMessage.style.display = 'block';
-      successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-  </script>
 </body>
 </html>

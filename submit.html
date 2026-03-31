@@ -34,7 +34,7 @@
 
     <div class="form-wrap">
       <div
-        data-fs-success
+        id="successMessage"
         style="display:none; border: 1px solid var(--border); background: rgba(31, 58, 50, 0.05); padding: 20px; margin-bottom: 22px;"
       >
         <strong style="display:block; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.08em; font-size:12px; color:var(--accent);">
@@ -47,40 +47,41 @@
         </p>
       </div>
 
-      <div data-fs-error style="display:none; border: 1px solid #a94442; background: rgba(169, 68, 66, 0.06); padding: 16px; margin-bottom: 22px;">
+      <div
+        id="errorMessage"
+        style="display:none; border: 1px solid #a94442; background: rgba(169, 68, 66, 0.06); padding: 16px; margin-bottom: 22px;"
+      >
         The Office was unable to receive your submission. Please review the form and try again.
       </div>
 
-      <form id="proposalForm">
+      <form id="proposalForm" action="https://formspree.io/f/xjgprakj" method="POST">
+        <input type="hidden" name="_subject" value="OUW Submission — Program 001" />
+
         <div class="field-grid">
           <div class="field">
             <label for="projectTitle">Project Title</label>
-            <input type="text" id="projectTitle" name="projectTitle" data-fs-field required />
-            <span data-fs-error="projectTitle" class="helper"></span>
+            <input type="text" id="projectTitle" name="projectTitle" required />
           </div>
 
           <div class="field">
             <label for="alias">Applicant Alias</label>
-            <input type="text" id="alias" name="alias" data-fs-field required />
-            <span data-fs-error="alias" class="helper"></span>
+            <input type="text" id="alias" name="alias" required />
           </div>
 
           <div class="field">
             <label for="email">Contact Email</label>
-            <input type="email" id="email" name="email" data-fs-field required />
+            <input type="email" id="email" name="email" required />
             <div class="helper">Used privately by the Office for contact and review notices.</div>
-            <span data-fs-error="email" class="helper"></span>
           </div>
 
           <div class="field">
             <label for="amount">Requested Amount</label>
-            <input type="text" id="amount" name="amount" placeholder="e.g. $12,000" data-fs-field required />
-            <span data-fs-error="amount" class="helper"></span>
+            <input type="text" id="amount" name="amount" placeholder="e.g. $12,000" required />
           </div>
 
           <div class="field full">
             <label for="category">Category</label>
-            <select id="category" name="category" data-fs-field required>
+            <select id="category" name="category" required>
               <option value="">Select a category</option>
               <option>Object</option>
               <option>Platform</option>
@@ -92,49 +93,42 @@
               <option>Archive</option>
               <option>Other</option>
             </select>
-            <span data-fs-error="category" class="helper"></span>
           </div>
 
           <div class="field full">
             <label for="wealth">What unnecessary wealth will this project create?</label>
-            <textarea id="wealth" name="wealth" data-fs-field required></textarea>
-            <span data-fs-error="wealth" class="helper"></span>
+            <textarea id="wealth" name="wealth" required></textarea>
           </div>
 
           <div class="field full">
             <label for="exist">Why must this exist despite not being necessary?</label>
-            <textarea id="exist" name="exist" data-fs-field required></textarea>
-            <span data-fs-error="exist" class="helper"></span>
+            <textarea id="exist" name="exist" required></textarea>
           </div>
 
           <div class="field full">
             <label for="benefits">Who benefits from this unnecessary wealth?</label>
-            <textarea id="benefits" name="benefits" data-fs-field required></textarea>
-            <span data-fs-error="benefits" class="helper"></span>
+            <textarea id="benefits" name="benefits" required></textarea>
           </div>
 
           <div class="field full">
             <label for="mechanism">How will the project increase prestige, excess, or irrational value?</label>
-            <textarea id="mechanism" name="mechanism" data-fs-field required></textarea>
-            <span data-fs-error="mechanism" class="helper"></span>
+            <textarea id="mechanism" name="mechanism" required></textarea>
           </div>
 
           <div class="field full">
             <label for="loss">What would be lost if this project were never realized?</label>
-            <textarea id="loss" name="loss" data-fs-field required></textarea>
-            <span data-fs-error="loss" class="helper"></span>
+            <textarea id="loss" name="loss" required></textarea>
           </div>
 
           <div class="field full">
             <label for="stage">Current Stage of Development</label>
-            <select id="stage" name="stage" data-fs-field required>
+            <select id="stage" name="stage" required>
               <option value="">Select current stage</option>
               <option>Concept only</option>
               <option>Partially imagined</option>
               <option>Ready for ceremonial approval</option>
               <option>Structurally inevitable</option>
             </select>
-            <span data-fs-error="stage" class="helper"></span>
           </div>
         </div>
 
@@ -146,7 +140,7 @@
         </div>
 
         <div style="margin-top: 20px;">
-          <button class="button primary" type="submit" data-fs-submit-btn>Submit to Office</button>
+          <button class="button primary" id="submitButton" type="submit">Submit to Office</button>
         </div>
 
         <div class="form-note">
@@ -162,16 +156,44 @@
   </footer>
 
   <script>
-    window.formspree =
-      window.formspree ||
-      function () {
-        (formspree.q = formspree.q || []).push(arguments);
-      };
-    formspree('initForm', {
-      formElement: '#proposalForm',
-      formId: 'xjgprakj'
+    const form = document.getElementById('proposalForm');
+    const submitButton = document.getElementById('submitButton');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      errorMessage.style.display = 'none';
+      submitButton.disabled = true;
+      submitButton.textContent = 'Submitting...';
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          form.reset();
+          form.style.display = 'none';
+          successMessage.style.display = 'block';
+          successMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          errorMessage.style.display = 'block';
+        }
+      } catch (error) {
+        errorMessage.style.display = 'block';
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Submit to Office';
+      }
     });
   </script>
-  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
